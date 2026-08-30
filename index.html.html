@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HEVILL — Real Human</title>
+<style>
+:root{--bg:#090a0f;--card:#13151d;--card2:#191c26;--text:#f6f7fb;--muted:#a7adbb;--accent:#b98cff;--accent2:#6ee7d8;--danger:#ff6b7a}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 20% 0%,#241a3d 0,#090a0f 38%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+.app{max-width:1050px;margin:auto;min-height:100vh;padding-bottom:80px}
+header{padding:28px 22px 18px;display:flex;justify-content:space-between;align-items:center}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:48px;height:48px;border-radius:16px;background:linear-gradient(135deg,var(--accent),#6f5cff);display:grid;place-items:center;font-weight:900;color:#0a0910;box-shadow:0 10px 35px #9b7aff44}.brand h1{font-size:25px;margin:0}.brand p{margin:2px 0 0;color:var(--muted);font-size:12px}
+.avatar{width:42px;height:42px;border:1px solid #ffffff20;background:#ffffff0a;border-radius:50%;color:white}
+.hero{margin:12px 18px 18px;padding:30px 25px;border:1px solid #ffffff14;border-radius:28px;background:linear-gradient(135deg,#ffffff0c,#ffffff03);box-shadow:0 20px 70px #0007}
+.hero h2{font-size:38px;line-height:1.05;margin:0 0 10px}.hero p{color:#c4c8d2;max-width:650px;margin:0 0 20px}.search{display:flex;gap:10px}.search input{flex:1;background:#0c0e14;border:1px solid #ffffff18;color:white;border-radius:15px;padding:14px 16px;font-size:15px}.btn{border:0;border-radius:15px;padding:13px 18px;font-weight:700;cursor:pointer;background:var(--accent);color:#100b18}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:0 18px}.tile{background:var(--card);border:1px solid #ffffff10;border-radius:20px;padding:18px;min-height:125px;cursor:pointer;transition:.2s}.tile:hover{transform:translateY(-2px);border-color:#ffffff2a;background:var(--card2)}.icon{font-size:27px}.tile h3{margin:12px 0 4px;font-size:16px}.tile p{margin:0;color:var(--muted);font-size:12px}
+.panel{margin:18px;padding:22px;background:var(--card);border:1px solid #ffffff12;border-radius:22px}.panel h2{margin-top:0}.hidden{display:none}.chat{height:320px;overflow:auto;padding:8px}.bubble{max-width:80%;padding:12px 14px;border-radius:16px;margin:8px 0;background:#202330}.me{margin-left:auto;background:#6f5cff33}.chatbar{display:flex;gap:8px}.chatbar input{flex:1;background:#0d0f15;border:1px solid #ffffff18;color:white;border-radius:14px;padding:13px}
+.help{background:linear-gradient(135deg,#3a121b,#211017);border-color:#ff6b7a44}.help .icon{color:#ff8793}
+footer{text-align:center;color:#777f8d;padding:25px;font-size:12px}
+@media(max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}.hero h2{font-size:30px}}@media(max-width:430px){.grid{gap:9px;padding:0 12px}.tile{padding:14px;min-height:115px}.hero{margin:10px 12px 14px}.hero h2{font-size:27px}header{padding:20px 14px 12px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header><div class="brand"><div class="logo">H</div><div><h1>HEVILL</h1><p>Become a REAL HUMAN.</p></div></div><button class="avatar" onclick="openPanel('profile')">N</button></header>
+
+<section class="hero">
+<h2>Everything you need.<br>One human-first place.</h2>
+<p>Explore, create, learn, connect, grow and get help — with <b>Neira AI</b> beside you.</p>
+<div class="search"><input id="globalSearch" placeholder="Search HEVILL…"><button class="btn" onclick="searchApp()">Search</button></div>
+</section>
+
+<section class="grid">
+<div class="tile" onclick="openPanel('neira')"><div class="icon">🤖</div><h3>Neira AI</h3><p>Your personal AI assistant</p></div>
+<div class="tile" onclick="openPanel('connect')"><div class="icon">💬</div><h3>Connect</h3><p>Chats, contacts, voice & media</p></div>
+<div class="tile" onclick="openPanel('discover')"><div class="icon">🎬</div><h3>Discover</h3><p>Watch and create short videos</p></div>
+<div class="tile help" onclick="openPanel('help')"><div class="icon">🛡️</div><h3>HELP</h3><p>When you feel unsafe, scared or alone</p></div>
+<div class="tile" onclick="openPanel('create')"><div class="icon">✨</div><h3>Create</h3><p>Stories, poetry, songs & ideas</p></div>
+<div class="tile" onclick="openPanel('skills')"><div class="icon">🧠</div><h3>Skills</h3><p>Find and develop your talents</p></div>
+<div class="tile" onclick="openPanel('knowledge')"><div class="icon">📚</div><h3>Knowledge</h3><p>History, culture & learning</p></div>
+<div class="tile" onclick="openPanel('life')"><div class="icon">🌍</div><h3>Life</h3><p>Travel, food, home & more</p></div>
+</section>
+
+<section id="panel" class="panel hidden"></section>
+<footer>HEVILL Alpha • A beginning, not the finished dream. 🖤</footer>
+</div>
+
+<script>
+const panel=document.getElementById('panel');
+function openPanel(type){
+ const data={
+ neira:['🤖 Neira AI','Hi! I’m Neira AI. Tell me what you need, want, dream about, or want to learn.','Ask Neira anything…'],
+ connect:['💬 HEVILL Connect','Your future home for contacts, private chats, images, documents, GIFs, stickers and voice messages.','Type a message…'],
+ discover:['🎬 HEVILL Discover','A place to watch and create reels, discover creators and find new ideas.','Search creators or topics…'],
+ help:['🛡️ HEVILL HELP','If you feel unsafe or scared, tell HEVILL what is happening. We can guide you toward practical next steps and trusted/local help.','What do you need help with?'],
+ create:['✨ Create','Write a story, poem, song idea, script or creative project with HEVILL tools.','What do you want to create?'],
+ skills:['🧠 Skills','Discover your strengths and build a personal learning path.','What skill do you want to develop?'],
+ knowledge:['📚 Knowledge','Explore history, cultures, religious information and educational topics with context and care.','What do you want to learn?'],
+ life:['🌍 Life','Future HEVILL tools for travel, rides, food, recipes, home design and shopping.','What are you planning?'],
+ profile:['👤 Profile','Your HEVILL space for settings, privacy, saved work and preferences.','']
+ };
+ const [title,desc,placeholder]=data[type];
+ panel.classList.remove('hidden');
+ if(type==='neira'||type==='connect'){
+   panel.innerHTML=`<h2>${title}</h2><p>${desc}</p><div class="chat" id="chat"><div class="bubble">${type==='neira'?'Hello 👋 I’m Neira AI. This Alpha is ready for your ideas.':'Welcome to HEVILL Connect. Messaging is currently an Alpha interface.'}</div></div><div class="chatbar"><input id="msg" placeholder="${placeholder}"><button class="btn" onclick="sendDemo('${type}')">Send</button></div>`;
+ }else{
+   panel.innerHTML=`<h2>${title}</h2><p>${desc}</p>${placeholder?`<div class="chatbar"><input id="msg" placeholder="${placeholder}"><button class="btn" onclick="demoAction('${type}')">Continue</button></div>`:''}<p id="result" style="color:#a7adbb;margin-top:16px"></p>`;
+ }
+ panel.scrollIntoView({behavior:'smooth'});
+}
+function sendDemo(type){
+ const input=document.getElementById('msg'),chat=document.getElementById('chat'); if(!input.value.trim())return;
+ chat.innerHTML+=`<div class="bubble me">${escapeHtml(input.value)}</div>`;
+ const answer=type==='neira'?'I received that. In the next HEVILL build, this box will connect to the real Neira AI service. 🤖🖤':'Message received in the Alpha interface. Real private messaging comes next. 💬';
+ chat.innerHTML+=`<div class="bubble">${answer}</div>`;input.value='';chat.scrollTop=chat.scrollHeight;
+}
+function demoAction(type){document.getElementById('result').textContent='Great — this HEVILL area is marked for the next build. 🖤'}
+function searchApp(){const q=document.getElementById('globalSearch').value.trim();if(q)openPanel('neira')}
+function escapeHtml(s){return s.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+</script>
+</body>
+</html>
